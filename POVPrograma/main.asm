@@ -9,7 +9,10 @@
 ; Replace with your application code
 .CSEG
 .ORG 0
+
+.include "Retardos1.mac"
 jmp main
+
 
 main:
 	; Asignamos el registro que mantendra el indice actual de la palabra
@@ -39,31 +42,30 @@ loop:
 	LDI ZL,LOW(LETRA_A<<1)
 	call recorrer_letra
 	//espera 6 milisegundos
-	call tresMS
-	call tresMS
+	delayEnMiliSegundos R18,R19,R21,60
 	rjmp loop
 
 recorrer_letra:
     //obtener el valor del apuntador y recorrer en 1 el mismo
 	LPM R20,Z+
 	out portD,R20
-	call tresMS
+	delayEnMiliSegundos R18,R19,R21,30
 	//obtener el valor del apuntador y recorrer en 1 el mismo
 	LPM R20,Z+
 	out portD,R20
-	call tresMS
+	delayEnMiliSegundos R18,R19,R21,30
 	//obtener el valor del apuntador y recorrer en 1 el mismo
     LPM R20,Z+
 	out portD,R20
-	call tresMS
+	delayEnMiliSegundos R18,R19,R21,30
 	//obtener el valor del apuntador y recorrer en 1 el mismo
 	LPM R20,Z+
 	out portD,R20
-	call tresMS
+	delayEnMiliSegundos R18,R19,R21,30
 	//obtener el valor del apuntador y recorrer en 1 el mismo
 	LPM R20,Z+
 	out portD,R20
-	call tresMS
+	delayEnMiliSegundos R18,R19,R21,30
 	ret
 
 .org 0x500
@@ -94,15 +96,7 @@ LETRA_X:  .DB 1,0,0,0,0,0,1, 0,1,0,0,0,1,0, 0,0,1,1,1,0,0, 0,1,0,0,0,1,0, 1,0,0,
 LETRA_Y:  .DB 1,1,1,0,0,0,0, 0,0,0,1,0,0,0, 0,0,0,0,1,1,1, 0,0,0,1,0,0,0, 1,1,1,0,0,0,0
 LETRA_Z:  .DB 1,0,0,0,0,1,1, 1,0,0,0,1,0,1, 1,0,0,1,0,0,1, 1,0,1,0,0,0,1, 1,1,0,0,0,0,1
 
-tresMS:
-    ldi  r18, 78
-    ldi  r19, 235
-L1: dec  r19
-    brne L1
-    dec  r18
-    brne L1
-    nop
-	ret
+
 
 
 

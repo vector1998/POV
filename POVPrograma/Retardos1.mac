@@ -1,0 +1,86 @@
+;Integrantes:
+;Victor Alejandro Martinez Medina
+;Emmanuel Jacob Maldonado Lopez
+;Juan Manuel Lafuente Araiza
+;Osvaldo Valadez
+;Fecha: 11/04/2019
+;Nombre del archivo: "Retardos1.mac"
+;Uso del archivo: Este archivo contiene macros como: 
+;unSegundo(para el retardo de un segundo)
+;,delayEnSegundos(retarda n segundos un programa)
+;,unMiliSegundo(retarda un milisegundo un programa)
+;,delayEnMiliSegundos(retarda m milisegundos un programa)
+;,DELAY(retarda haciendo 5 ciclos sin operar)
+;,LOADIO(pone un valor inmediato en un registro de I/O)
+
+;definimos una macro con el nombre de unSegundo
+.MACRO unSegundo
+    ldi  @0, 5      ;Cargamos en el registro variable @0 el valor de 5 
+    ldi  @1, 190    ;Cargamos en el registro variable @1 el valor de 190
+    ldi  @2, 194    ;Cargamos en el registro variable @2 el valor de 194
+ 
+;definimos la etiqueta L2
+L2: 
+    dec  @2         ;Decrementamos el registro variable @2       
+    brne L2         ;Si es 0 saltamos a L2
+    dec  @1         ;Decrementamos el registro @1
+    brne L2         ;Si es 0 saltamos a L2
+    dec  @0         ;Decrementamos el registro @0
+    brne L2         ;Si es 0 saltamos a L2
+.ENDMACRO
+
+;delay en segundos, recibe 4 registros y el numero de segundos
+.MACRO delayEnSegundos   
+	ldi @0, @4	;Cargamos en @0 el valor de @4
+
+;definimos la etiqueta c1
+c1:
+   unSegundo @1,@2,@3 ;Mandamos a llamar la macro unSegundo 
+   dec @0             ;Decrementamos el registro @0
+   brne c1	      ;Si es 0 saltamos a c1
+.ENDMACRO
+
+;Definimos la macro unMiliSegundo
+.MACRO unMiliSegundo
+    ldi  @0, 26           ;Cargamos en @0 el valor de 26
+    ldi  @1, 249          ;Cargamos en @1 el valor de 249
+
+;Definimos la etiqueta L2
+L2: 
+    dec  @1               ;Decrementamos @1
+    brne L2                ;si es 0 saltamos a L2
+    dec  @0                ;Decrementamos @0
+    brne L2                ;si es 0 saltamos a L2
+.ENDMACRO
+
+;Definimos la macro delayEnMiliSegundos
+.MACRO delayEnMiliSegundos
+	ldi @0, @3	;Cargamos en @0 el valor de @3
+
+;definimos la etiqueta c2
+c2:
+   unMiliSegundo @1,@2 ;Mandamos a llamar la macro un milisegundo 
+   dec @0             ;Decrementamos el registro @0
+   brne c2	      ;Si es 0 saltamos a c2
+.ENDMACRO
+
+;definimos la macro LOADIO
+.MACRO LOADIO
+   LDI R25,@1  ;Cargamos en R25 el valor de @1
+   OUT @0,R25  ;Sacamos por el puerto @0 indicado el valor de r25
+.ENDMACRO
+
+;Definimos la macro DELAY
+.MACRO DELAY
+ LDI @0,@1      ;cargamos en el registro @0 el valor de @1
+
+;Definimos la etiqueta BACK 
+BACK:
+    NOP         ;llamamos a la etiqueta NOP
+    NOP         ;llamamos a la etiqueta NOP
+    NOP         ;llamamos a la etiqueta NOP
+    NOP         ;llamamos a la etiqueta NOP
+    DEC @0      ;Decrementamos el registro @0
+BRNE BACK      ;Si es igual a 0 saltamos a BACK
+.ENDMACRO
+

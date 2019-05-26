@@ -1,5 +1,5 @@
 
-AVRASM ver. 2.2.7  D:\vecto\Documents\6_Semestre\LI\Proyecto\POVPrograma\POVPrograma\main.asm Sun May 26 11:55:43 2019
+AVRASM ver. 2.2.7  D:\vecto\Documents\6_Semestre\LI\Proyecto\POVPrograma\POVPrograma\main.asm Sun May 26 12:40:07 2019
 
 
 EQU  SIGNATURE_000 0000001e
@@ -698,11 +698,22 @@ EQU  INT_VECTORS_SIZE 00000034
 CSEG main         00000002
 CSEG loop         00000005
 CSEG LETRA_H      0000055f
-CSEG recorrer_letra 0000001e
+CSEG recorrer_letra 00000023
 CSEG LETRA_U      0000062b
 CSEG LETRA_R      00000604
 CSEG LETRA_A      00000500
-CSEG tresMS       00000688
+CSEG c2@delayEnMiliSegundos@1111 0000001a
+CSEG L2@unMiliSegundo@1117 0000001c
+CSEG c2@delayEnMiliSegundos@1138 00000026
+CSEG L2@unMiliSegundo@1144 00000028
+CSEG c2@delayEnMiliSegundos@1162 00000031
+CSEG L2@unMiliSegundo@1168 00000033
+CSEG c2@delayEnMiliSegundos@1186 0000003c
+CSEG L2@unMiliSegundo@1192 0000003e
+CSEG c2@delayEnMiliSegundos@1210 00000047
+CSEG L2@unMiliSegundo@1216 00000049
+CSEG c2@delayEnMiliSegundos@1234 00000052
+CSEG L2@unMiliSegundo@1240 00000054
 CSEG LETRA_B      00000503
 CSEG LETRA_C      00000506
 CSEG LETRA_D      00000518
@@ -725,4 +736,3 @@ CSEG LETRA_W      00000640
 CSEG LETRA_X      00000652
 CSEG LETRA_Y      00000664
 CSEG LETRA_Z      00000676
-CSEG L1           0000068a
